@@ -38,11 +38,11 @@ function termrun#run(...) abort
   let l:config = termrun#getconf()
 
   " If given an argument, run it with default(_) settings.
-  if a:0 != 0 | call s:run(a:000, l:config['_']['opts']) | return | endif
+  if a:0 != 0 | call termrun#exec(a:000, l:config['_']['opts']) | return | endif
 
   let l:ft_cnf = get(l:config, &filetype, {})
   if l:ft_cnf != {}
-    call s:run(l:ft_cnf['command'] + [expand('%')], l:ft_cnf['opts'])
+    call termrun#exec(l:ft_cnf['command'] + [expand('%')], l:ft_cnf['opts'])
   endif
 endfunction
 
@@ -50,7 +50,7 @@ let s:termrun_bufnr = -1
 
 " @param {cmd} = List " exec command
 " @param {conf} = dict " see s:default
-function s:run(cmd, opts) abort
+function termrun#exec(cmd, opts) abort
   let l:run_win_nr = bufwinnr(s:termrun_bufnr)
   if l:run_win_nr != -1
     silent! execute l:run_win_nr .. 'wincmd c'
@@ -63,6 +63,9 @@ function s:run(cmd, opts) abort
   else
     let l:opts['term_rows'] = a:opts['size']
   endif
+  for key in keys(filter(copy(a:opts), 'v:key != "size" && v:key != "vertical"'))
+    let l:opts[key] = a:opts[key]
+  endfor
 
   let s:termrun_bufnr = term_start(a:cmd, l:opts)
   silent! execute('wincmd p')
