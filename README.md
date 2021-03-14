@@ -52,7 +52,9 @@ let g:termrun_config = {
 ```
 
 * filetype `_` is used as a file type independent setting.
-* `opts`
+* you can set two basic items in opts.
+  * `vertical` is bool, if true the output window will be split vertically.
+  * `size` is number for output window size
 
 ## Inspired
 
