@@ -1,7 +1,7 @@
 let s:opts = get(get(termrun#getconf(), 'go'), 'opts')
 
 function termrun#go#run(...) abort
-  if a:0 == 0 | call termrun#run() | return | endif
+  if a:0 == 0 | call termrun#run#run() | return | endif
   call termrun#exec(['go', 'run'] + a:000, s:opts)
 endfunction
 

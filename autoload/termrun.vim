@@ -4,15 +4,15 @@ let s:default = {
 \   'opts': {'vertical': v:false, 'size': &lines/2}
 \ },
 \ 'sh': {
-\   'command': ['bash'], 
+\   'run': ['bash'], 
 \   'opts': {'vertical': v:true, 'size': 80}
 \ },
 \ 'go': {
-\   'command': ['go', 'run'],
+\   'run': ['go', 'run'],
 \   'opts': {'vertical': v:true, 'size': 80}
 \ },
 \ 'markdown': {
-\   'command': ['glow'],
+\   'run': ['glow'],
 \   'opts': {'vertical': v:true, 'size': &columns/2}
 \ }
 \ }
@@ -33,21 +33,7 @@ function termrun#getconf() abort
   return s:config
 endfunction
 
-" @param {...} = List " exec command
-function termrun#run(...) abort
-  let l:config = termrun#getconf()
-
-  " If given an argument, run it with default(_) settings.
-  if a:0 != 0 | call termrun#exec(a:000, l:config['_']['opts']) | return | endif
-
-  let l:ft_cnf = get(l:config, &filetype, {})
-  if l:ft_cnf != {}
-    call termrun#exec(l:ft_cnf['command'] + [expand('%')], l:ft_cnf['opts'])
-  endif
-endfunction
-
 let s:termrun_bufnr = -1
-
 " @param {cmd} = List " exec command
 " @param {conf} = dict " see s:default
 function termrun#exec(cmd, opts) abort
