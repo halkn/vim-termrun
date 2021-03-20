@@ -5,7 +5,7 @@ This is vim plugin to run command in terminal with Vim8.
 ## Features
 
 * `TermRun` command executes any command and outputs the result to terminal window.
-* `<Plug>(termrun)` is mapping to execute editing file.
+* `<Plug>(termrun-run)` is mapping to execute editing file.
   * default mapping is `<leader>r`.
 
 ## Usage
@@ -17,7 +17,7 @@ The argument is executed as it is and the result is output to the Terminal windo
 :TermRun ls -l
 ```
 
-With no arguments or when use mapping `<Plug>(termrun)`, execute editing file.
+With no arguments or when use mapping `<Plug>(termrun-run)`, execute editing file.
 The currently supported file types are:
 
 | filetype | execute command |
@@ -37,15 +37,15 @@ let g:termrun_config = {
 \   'opts': {'vertical': v:false, 'size': &lines/2}
 \ },
 \ 'sh': {
-\   'command': ['bash'], 
+\   'run': ['bash'], 
 \   'opts': {'vertical': v:true, 'size': 80}
 \ },
 \ 'go': {
-\   'command': ['go', 'run'],
+\   'run': ['go', 'run'],
 \   'opts': {'vertical': v:true, 'size': 80}
 \ },
 \ 'markdown': {
-\   'command': ['glow'],
+\   'run': ['glow'],
 \   'opts': {'vertical': v:true, 'size': &columns/2}
 \ }
 \ }

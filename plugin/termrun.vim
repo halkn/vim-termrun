@@ -3,10 +3,10 @@ if exists('g:loaded_termrun')
 endif
 let g:loaded_termrun = 1
 
-command -nargs=* -complete=dir TermRun call termrun#run(<f-args>)
+command -nargs=* -complete=dir TermRun call termrun#run#run(<f-args>)
 
-nnoremap <Plug>(termrun) <cmd>call termrun#run()<CR>
+nnoremap <Plug>(termrun-run) <cmd>call termrun#run#run()<CR>
 
-if !hasmapto('<Plug>(termrun)')
-   nmap <Leader>r <Plug>(termrun)
+if !hasmapto('<Plug>(termrun-run)')
+   nmap <Leader>r <Plug>(termrun-run)
 endif
