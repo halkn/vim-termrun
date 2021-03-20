@@ -33,28 +33,18 @@ The following settings are examples and are the default settings.
 
 ```vim
 let g:termrun_config = {
-\ '_': {
-\   'opts': {'vertical': v:false, 'size': &lines/2}
-\ },
-\ 'sh': {
-\   'run': ['bash'], 
-\   'opts': {'vertical': v:true, 'size': 80}
-\ },
-\ 'go': {
-\   'run': ['go', 'run'],
-\   'opts': {'vertical': v:true, 'size': 80}
-\ },
+\ '_':  { 'opts': {} },
+\ 'sh': { 'run': ['bash'], 'opts': {} },
+\ 'go': { 'run': ['go', 'run'], 'opts': {} },
 \ 'markdown': {
 \   'run': ['glow'],
-\   'opts': {'vertical': v:true, 'size': &columns/2}
+\   'opts': {'vertical': v:true, 'term_cols': &columns/2}
 \ }
 \ }
 ```
 
 * filetype `_` is used as a file type independent setting.
-* you can set two basic items in opts.
-  * `vertical` is bool, if true the output window will be split vertically.
-  * `size` is number for output window size
+* `opts` can have the same options as `term_start()`. See `:h term_start()`
 
 ## Inspired
 
