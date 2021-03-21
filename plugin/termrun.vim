@@ -3,11 +3,9 @@ if exists('g:loaded_termrun')
 endif
 let g:loaded_termrun = 1
 
-command -nargs=* -complete=dir TermRun call termrun#run#run(<f-args>)
+command -nargs=* -complete=dir TermRun call termrun#run#command(<f-args>)
+command -nargs=* -complete=dir TermRunQuick call termrun#run#quick(<f-args>)
 command -nargs=* -complete=dir TermRunTest call termrun#run#test(<f-args>)
 
-nnoremap <Plug>(termrun-run) <cmd>call termrun#run#run()<CR>
-
-if !hasmapto('<Plug>(termrun-run)')
-   nmap <Leader>r <Plug>(termrun-run)
-endif
+nnoremap <Plug>(termrun-quick) <cmd>call termrun#run#quick()<CR>
+nnoremap <Plug>(termrun-test)  <cmd>call termrun#run#test()<CR>
