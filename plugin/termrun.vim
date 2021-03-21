@@ -4,6 +4,7 @@ endif
 let g:loaded_termrun = 1
 
 command -nargs=* -complete=dir TermRun call termrun#run#run(<f-args>)
+command -nargs=* -complete=dir TermRunTest call termrun#run#test(<f-args>)
 
 nnoremap <Plug>(termrun-run) <cmd>call termrun#run#run()<CR>
 
