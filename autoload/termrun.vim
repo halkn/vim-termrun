@@ -6,7 +6,11 @@ function termrun#getconf() abort
   let s:config = {
   \ '_':  { 'opts': {} },
   \ 'sh': { 'run': ['bash'], 'opts': {} },
-  \ 'go': { 'run': ['go', 'run'], 'opts': {} },
+  \ 'go': { 
+  \   'run': ['go', 'run'],
+  \   'test': { 'cmd': ['go', 'test'], 'target': '%:p:h' },
+  \   'opts': {} 
+  \ },
   \ 'markdown': {
   \   'run': ['glow'],
   \   'opts': {'vertical': v:true, 'term_cols': &columns/2}
@@ -17,6 +21,7 @@ function termrun#getconf() abort
   let l:conf = get(g:, 'termrun_config', {})
   for ft in keys(l:conf)
     let s:config[ft]['run'] = get(l:conf[ft], 'run', s:config[ft]['run'])
+    let s:config[ft]['test'] = get(l:conf[ft], 'test', s:config[ft]['test'])
     let s:config[ft]['opts'] = get(l:conf[ft], 'opts', s:config[ft]['opts'])
   endfor
   return s:config
