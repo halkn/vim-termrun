@@ -47,3 +47,10 @@ function termrun#exec(cmd, opts) abort
   let s:termrun_bufnr = term_start(a:cmd, l:opts)
   silent! execute('wincmd p')
 endfunction
+
+function! termrun#close() abort
+  let l:winnr = bufwinnr(s:termrun_bufnr)
+  if l:winnr != -1
+    silent! execute l:winnr.'wincmd q'
+  endif
+endfunction
