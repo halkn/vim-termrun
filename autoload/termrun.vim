@@ -1,3 +1,5 @@
+let s:resume_cmd = { 'cmd': [], 'opts': {} }
+
 let s:config = {}
 function termrun#getconf() abort
   if s:config != {} | return s:config | endif
@@ -34,6 +36,7 @@ let s:termrun_bufnr = -1
 " @param {cmd} = List " exec command
 " @param {conf} = dict " see s:config
 function termrun#exec(cmd, opts) abort
+  let s:resume_cmd = { 'cmd': a:cmd, 'opts': a:opts}
   let l:run_win_nr = bufwinnr(s:termrun_bufnr)
   if l:run_win_nr != -1
     silent! execute l:run_win_nr .. 'wincmd c'
@@ -53,4 +56,9 @@ function! termrun#close() abort
   if l:winnr != -1
     silent! execute l:winnr.'wincmd q'
   endif
+endfunction
+
+function! termrun#resume() abort
+  if s:resume_cmd.cmd == [] | return | endif
+  call termrun#exec(s:resume_cmd.cmd, s:resume_cmd.opts)
 endfunction

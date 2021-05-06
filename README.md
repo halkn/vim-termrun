@@ -7,6 +7,7 @@ This is vim plugin to run command in terminal with Vim8.
 * `TermRun` command executes any command and outputs the result to terminal window.
 * `TermRunQuick` command executes a quick command for each filetype.
 * `TermRunTest` command executes a test command for each filetype.
+* `TermRunResume` command executes the last executed `TermRun*` command.
 
 ## Usage
 
@@ -28,13 +29,18 @@ Executes the command set for each filetype.
   * The target of `TermRunTest` is specified by the setting.
 * If an argument is given, it will be executed as an argument of each command.
 
-### Suppourted FileType
+#### Suppourted FileType
 
 | filetype | quick command | test command |
 |----------|---------------|--------------|
 | sh       | bash          | -            |
 | go       | go run        | go test      |
 | mardkwon | [glow][1]     | -            |
+
+### TermRunResume
+
+Execute the same `TermRun`, `TermRunQuick` or `TermRunTest` command
+that was executed immediately before.
 
 ## Config
 
